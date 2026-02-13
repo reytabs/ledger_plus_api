@@ -5,6 +5,10 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { BookModule } from './book/book.module';
 import { AuthModule } from './auth/auth.module';
+import { BillModule } from './bill/bill.module';
+import { CategoryModule } from './category/category.module';
+import { AssetModule } from './asset/asset.module';
+import { AssetTypeModule } from './asset-type/asset-type.module';
 
 @Module({
   imports: [
@@ -17,6 +21,10 @@ import { AuthModule } from './auth/auth.module';
     // insert modules here
     BookModule,
     AuthModule,
+    BillModule,
+    CategoryModule,
+    AssetModule,
+    AssetTypeModule,
   ],
   controllers: [AppController],
   providers: [AppService],

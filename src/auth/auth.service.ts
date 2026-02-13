@@ -19,7 +19,13 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async signUp(signUpDto: SignUpDto): Promise<{ token: string }> {
+  async signUp(signUpDto: SignUpDto): Promise<{
+    token: string;
+    success: boolean;
+    header: string;
+    statusCode: number;
+    message: string;
+  }> {
     const { name, email, password } = signUpDto;
     const hashedPassword = await bcrypt.hash(password, 10);
     let token;
@@ -36,10 +42,22 @@ export class AuthService {
       }
     }
 
-    return { token };
+    return {
+      token,
+      success: true,
+      header: 'Registration',
+      statusCode: 201,
+      message: 'Account is succssfully registered.',
+    };
   }
 
-  async login(loginDto: LoginDto): Promise<{ token: string }> {
+  async login(loginDto: LoginDto): Promise<{
+    token: string;
+    success: boolean;
+    header: string;
+    statusCode: number;
+    message: string;
+  }> {
     const { email, password } = loginDto;
     const user = await this.userModel.findOne({ email }).exec();
     if (!user) throw new UnauthorizedException('Invalid credentials.');
@@ -49,6 +67,12 @@ export class AuthService {
       throw new UnauthorizedException('Invalid credentials.');
 
     const token = this.jwtService.sign({ id: user._id });
-    return { token };
+    return {
+      token,
+      success: true,
+      header: 'Unauthorized',
+      statusCode: 200,
+      message: 'Login successful',
+    };
   }
 }
