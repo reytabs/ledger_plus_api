@@ -5,34 +5,25 @@ import { User } from 'src/auth/schemas/user.schema';
 @Schema({
   timestamps: true,
 })
-export class Bill {
+export class Goal {
   @Prop({ required: true })
   name: string;
 
   @Prop({ type: SchemaTypes.Decimal128, required: true })
-  amount: string;
+  target_amount: string;
 
-  @Prop({ required: true })
-  due_date: Date;
+  @Prop({ type: SchemaTypes.Decimal128, required: true })
+  current_amount: string;
 
   @Prop({ required: true })
   category: string;
 
   @Prop({ required: true })
-  status: string;
+  target_date: Date;
 
-  @Prop()
-  is_recurring: Boolean;
-
-  @Prop()
-  frequency: string;
-
-  @Prop()
-  notes: string;
-
-  // Foreign key reference to User
+  // optional user reference for ownership
   @Prop({ type: Types.ObjectId, ref: 'User' })
   user: User;
 }
 
-export const BillSchema = SchemaFactory.createForClass(Bill);
+export const GoalSchema = SchemaFactory.createForClass(Goal);

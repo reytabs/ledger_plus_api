@@ -3,7 +3,7 @@ import { AuthService } from './auth.service';
 import { SignUpDto } from './dto/sign-up.dto';
 import { LoginDto } from './dto/login.dto';
 
-@Controller('auth')
+@Controller('api')
 export class AuthController {
   constructor(private authService: AuthService) {}
 
@@ -25,6 +25,8 @@ export class AuthController {
     header: string;
     statusCode: number;
     message: string;
+    name: string;
+    email: string;
   }> {
     return this.authService.login(loginDto);
   }

@@ -57,6 +57,8 @@ export class AuthService {
     header: string;
     statusCode: number;
     message: string;
+    name: string;
+    email: string;
   }> {
     const { email, password } = loginDto;
     const user = await this.userModel.findOne({ email }).exec();
@@ -70,9 +72,11 @@ export class AuthService {
     return {
       token,
       success: true,
-      header: 'Unauthorized',
+      header: 'Successful',
       statusCode: 200,
       message: 'Login successful',
+      name: user.name,
+      email: user.email,
     };
   }
 }
